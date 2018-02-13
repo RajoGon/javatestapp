@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "myserverAdminLogin": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "mysqlserver"
+    },
+    "myserverAdminLoginPassword": {
+      "type": "securestring",
+      "defaultValue": "rkjbjb123@#nd#A"
+    }},
+  "variables": {
+    "myserverName": "[concat('myserver', uniqueString(resourceGroup().id))]"},
+  "resources": [
+    {
+      "name": "[variables('myserverName')]",
+      "type": "Microsoft.Sql/servers",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2014-04-01-preview",
+      "dependsOn": [ ],
+      "tags": {
+        "displayName": "myserver"
+      },
+      "properties": {
+        "administratorLogin": "[parameters('myserverAdminLogin')]",
+        "administratorLoginPassword": "[parameters('myserverAdminLoginPassword')]"
+      },
+      "resources": [
+        {
+          "name": "AllowAllWindowsAzureIps",
+          "type": "firewallrules",
+          "location": "[resourceGroup().location]",
+          "apiVersion": "2014-04-01-preview",
+          "dependsOn": [
+            "[resourceId('Microsoft.Sql/servers', variables('myserverName'))]"
+          ],
+          "properties": {
+            "startIpAddress": "0.0.0.0",
+            "endIpAddress": "0.0.0.0"
+          }
+        }
+      ]
+    }],
+  "outputs": {}
+}

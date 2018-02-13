@@ -1,0 +1,72 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "_artifactsLocation": {
+      "type": "string"
+    },
+    "_artifactsLocationSasToken": {
+      "type": "securestring"
+    },
+    "tshirt": {
+      "type": "string",
+      "allowedValues": [
+        "small",
+        "large"
+      ],
+      "defaultValue": "small"
+    }
+  },
+  "variables": {
+    "sqlserverTemplateFolder": "nestedtemplates",
+    "sqlserverTemplateFileName": "sqlserver.json",
+    "sqlserverTemplateParametersFileName": "sqlserver.parameters.json",
+    "mydbTemplateFolder": "nestedtemplates",
+    "mydbTemplateFileName": "mydb.json",
+    "mydbTemplateParametersFileName": "mydb.parameters.json",
+    "mydblargeTemplateFolder": "nestedtemplates",
+    "mydblargeTemplateFileName": "mydblarge.json",
+    "mydblargeTemplateParametersFileName": "mydblarge.parameters.json",
+    "dbsize": {
+      "small": "3073741824",
+      "large": "3147483648"
+    }
+  },
+  "resources": [
+    {
+      "name": "[concat('myserver', uniqueString(resourceGroup().id))]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2016-09-01",
+      "dependsOn": [],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(parameters('_artifactsLocation'), '/', variables('sqlserverTemplateFolder'), '/', variables('sqlserverTemplateFileName'), parameters('_artifactsLocationSasToken'))]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parametersLink": {
+          "uri": "[concat(parameters('_artifactsLocation'), '/', variables('sqlserverTemplateFolder'), '/', variables('sqlserverTemplateParametersFileName'), parameters('_artifactsLocationSasToken'))]",
+          "contentVersion": "1.0.0.0"
+        }
+      }
+    },
+    {
+      "name": "mydb",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2016-09-01",
+      "dependsOn": [ "[concat('myserver', uniqueString(resourceGroup().id))]" ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(parameters('_artifactsLocation'), '/', variables('mydbTemplateFolder'), '/', variables('mydbTemplateFileName'), parameters('_artifactsLocationSasToken'))]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "databasesize": {
+            "value": "[variables('dbsize')[parameters('tshirt')]]"
+          }
+        }
+      }
+    }],
+  "outputs": {}
+}
