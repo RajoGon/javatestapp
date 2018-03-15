@@ -4,7 +4,6 @@
 <fullyQualifiedTypeName name="com.microsoft.azure.management.resources.ResourceGroupProperties"/>
 <fullyQualifiedTypeName name="com.microsoft.azure.management.resources.GenericResource"/>
 <fullyQualifiedTypeName name="com.microsoft.azure.management.resources.GenericResources"/>
-<fullyQualifiedTypeName name="org.json.JSONObject"/>
 <fullyQualifiedTypeName name="java.util.LinkedHashMap"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="com.fabrikam.App"/>
@@ -14,11 +13,15 @@
 <fullyQualifiedTypeName name="java.io.FileInputStream"/>
 <fullyQualifiedTypeName name="com.microsoft.azure.management.compute.VirtualMachine"/>
 <fullyQualifiedTypeName name="com.microsoft.azure.management.compute.KnownLinuxVirtualMachineImage"/>
-<fullyQualifiedTypeName name="com.microsoft.azure.management.compute.VirtualMachineSizeTypes"/>
 <fullyQualifiedTypeName name="com.microsoft.azure.credentials.ApplicationTokenCredentials"/>
 <fullyQualifiedTypeName name="com.microsoft.azure.AzureEnvironment"/>
 <fullyQualifiedTypeName name="com.microsoft.azure.management.resources.fluentcore.utils.Utils"/>
-<fullyQualifiedTypeName name="com.microsoft.azure.management.compute.KnownWindowsVirtualMachineImage"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="org.json.JSONObject"/>
+<fullyQualifiedTypeName name="com.microsoft.azure.management.compute.Disk"/>
+<fullyQualifiedTypeName name="com.microsoft.azure.management.compute.Snapshot"/>
+<fullyQualifiedTypeName name="com.microsoft.azure.management.compute.OperatingSystemTypes"/>
+<fullyQualifiedTypeName name="com.microsoft.azure.management.compute.VirtualMachineSizeTypes"/>
+<fullyQualifiedTypeName name="com.microsoft.azure.management.compute.KnownWindowsVirtualMachineImage"/>
 </qualifiedTypeNameHistroy>
